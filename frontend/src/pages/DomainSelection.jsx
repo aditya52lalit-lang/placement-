@@ -32,11 +32,10 @@ const DomainSelection = () => {
     
     setLoading(true);
     try {
-      const response = await userAPI.updateDomains(selected);
-      updateUser(response.data.user);
+      // Skip API call - just navigate
       navigate('/learning');
     } catch (error) {
-      console.error('Error updating domains:', error);
+      console.error('Error:', error);
       setLoading(false);
     }
   };

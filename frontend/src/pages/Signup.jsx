@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
 import { UserPlus, Mail, Lock, User, Sparkles } from 'lucide-react';
@@ -163,10 +163,7 @@ const Signup = () => {
 
           {/* Footer */}
           <div className="text-center text-sm text-gray-400">
-            Already have an account?{' '}
-            <Link to="/login" className="text-purple-400 hover:text-purple-300 font-semibold">
-              Login
-            </Link>
+            Ready to begin your placement preparation journey!
           </div>
         </div>
       </motion.div>

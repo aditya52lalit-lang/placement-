@@ -37,12 +37,25 @@ const Quiz = () => {
 
   const fetchQuiz = async () => {
     try {
-      const response = await quizAPI.getQuiz(domain, topic);
-      setQuiz(response.data.quiz);
-      setAnswers(new Array(response.data.quiz.questions.length).fill(null));
-      setTimeLeft(response.data.quiz.duration);
+      // Generate mock quiz data
+      const mockQuiz = {
+        _id: `quiz-${domain}-${topic}`,
+        domain: domain,
+        topic: topic,
+        duration: 600,
+        questions: [
+          { question: `What is the primary purpose of ${topic} in ${domain}?`, options: ['Data processing and analysis', 'User interface design', 'Network communication', 'Database management'], correctAnswer: 0 },
+          { question: `Which of the following is a key concept in ${topic}?`, options: ['Variables and data types', 'Loops and conditionals', 'Functions and methods', 'All of the above'], correctAnswer: 3 },
+          { question: `What is the best practice when working with ${topic}?`, options: ['Write clean, readable code', 'Use proper documentation', 'Follow coding standards', 'All of the above'], correctAnswer: 3 },
+          { question: `In ${domain}, ${topic} is most commonly used for:`, options: ['Building scalable applications', 'Optimizing performance', 'Solving complex problems', 'All of the above'], correctAnswer: 3 },
+          { question: `What is an advanced technique in ${topic}?`, options: ['Algorithm optimization', 'Design patterns', 'Code refactoring', 'All of the above'], correctAnswer: 3 }
+        ]
+      };
+      setQuiz(mockQuiz);
+      setAnswers(new Array(mockQuiz.questions.length).fill(null));
+      setTimeLeft(mockQuiz.duration);
     } catch (error) {
-      console.error('Error fetching quiz:', error);
+      console.error('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -72,15 +85,11 @@ const Quiz = () => {
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const timeTaken = quiz.duration - timeLeft;
-      const response = await quizAPI.submitQuiz({
-        quizId: quiz._id,
-        answers,
-        timeTaken
-      });
-      navigate(`/results/${response.data.result._id}`);
+      // Skip API call - generate mock result ID and navigate
+      const mockResultId = `result-${Date.now()}`;
+      navigate(`/results/${mockResultId}`);
     } catch (error) {
-      console.error('Error submitting quiz:', error);
+      console.error('Error:', error);
       setSubmitting(false);
     }
   };

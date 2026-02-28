@@ -26,18 +26,30 @@ const Results = () => {
 
   const fetchResult = async () => {
     try {
-      const response = await quizAPI.getResultById(id);
-      setResult(response.data.result);
+      // Generate mock result data
+      const mockResult = {
+        _id: id,
+        score: Math.floor(Math.random() * 3) + 3, // 3-5 out of 5
+        totalQuestions: 5,
+        percentage: Math.random() * 40 + 60, // 60-100%
+        confidenceScore: Math.random() * 40 + 60, // 60-100%
+        timeTaken: 300,
+        strengths: ['Good understanding of core concepts', 'Strong problem-solving approach', 'Excellent time management'],
+        weaknesses: ['Need more practice on advanced topics', 'Could improve on edge cases'],
+        recommendations: ['Review advanced concepts', 'Practice more challenging problems', 'Study design patterns']
+      };
+      
+      setResult(mockResult);
       
       // Initialize chat with AI analysis
       setChatMessages([
         {
           type: 'ai',
-          content: `Hello! I've analyzed your quiz performance. You scored ${response.data.result.percentage.toFixed(1)}% with a confidence score of ${response.data.result.confidenceScore}. Let me break down your results.`
+          content: `Hello! I've analyzed your quiz performance. You scored ${mockResult.percentage.toFixed(1)}% with a confidence score of ${mockResult.confidenceScore.toFixed(0)}. Let me break down your results.`
         }
       ]);
     } catch (error) {
-      console.error('Error fetching result:', error);
+      console.error('Error:', error);
     } finally {
       setLoading(false);
     }

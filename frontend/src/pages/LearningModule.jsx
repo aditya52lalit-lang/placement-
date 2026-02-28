@@ -38,28 +38,19 @@ const LearningModule = () => {
 
   const fetchProgress = async () => {
     try {
-      const response = await progressAPI.getAllProgress();
-      const progressMap = {};
-      response.data.progress.forEach(p => {
-        progressMap[`${p.domain}-${p.topic}`] = p;
-      });
-      setProgress(progressMap);
+      // Skip API call - use mock data
+      setProgress({});
     } catch (error) {
-      console.error('Error fetching progress:', error);
+      console.error('Error:', error);
     }
   };
 
   const startModule = async (domain, module) => {
     try {
-      await progressAPI.updateProgress({
-        domain,
-        topic: module.id,
-        progress: 10,
-        completed: false
-      });
+      // Skip API call - just navigate
       navigate(`/quiz/${domain}/${module.id}`);
     } catch (error) {
-      console.error('Error starting module:', error);
+      console.error('Error:', error);
     }
   };
 

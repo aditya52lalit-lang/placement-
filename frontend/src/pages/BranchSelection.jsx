@@ -43,13 +43,12 @@ const BranchSelection = () => {
     setLoading(true);
 
     try {
-      const response = await userAPI.updateBranch(branch);
-      updateUser(response.data.user);
+      // Skip API call - just navigate
       setTimeout(() => {
         navigate('/domain-selection');
       }, 500);
     } catch (error) {
-      console.error('Error updating branch:', error);
+      console.error('Error:', error);
       setLoading(false);
     }
   };

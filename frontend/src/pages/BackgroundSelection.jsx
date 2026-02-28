@@ -23,13 +23,12 @@ const BackgroundSelection = () => {
     setLoading(true);
 
     try {
-      const response = await userAPI.updateBackground(background);
-      updateUser(response.data.user);
+      // Skip API call - just navigate
       setTimeout(() => {
         navigate('/branch-selection');
       }, 500);
     } catch (error) {
-      console.error('Error updating background:', error);
+      console.error('Error:', error);
       setLoading(false);
     }
   };
